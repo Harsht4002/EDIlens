@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-const API_BASE = "http://localhost:8000";
+const API_BASE = "https://edilens.onrender.com";
 
 type ParsedSegment = {
   index?: number;
@@ -226,44 +226,43 @@ export default function Home() {
 
       {result && (
         <div style={{ marginTop: 16, display: "grid", gap: 16 }}>
-          {!completeParse && (
-            <div
-              style={{
-                border: "1px solid #e5e7eb",
-                borderRadius: 10,
-                padding: 14,
-                background: "#ffffff",
-              }}
-            >
-              <h2 style={{ marginTop: 0, marginBottom: 8 }}>Parsed Segments</h2>
-              <p style={{ marginTop: 0, color: "#6b7280", fontSize: 14 }}>
-                {result.segments.length} segments parsed. Click any row for explanation.
-              </p>
-              <ul style={{ listStyle: "none", padding: 0 }}>
-                {result.segments.map((seg, i) => (
-                  <li
-                    key={i}
-                    onClick={() => explain(seg.error ? "error" : "segment", seg)}
-                    style={{
-                      padding: "10px 12px",
-                      marginBottom: 6,
-                      cursor: "pointer",
-                      border: "1px solid #d1d5db",
-                      borderRadius: 8,
-                      backgroundColor: seg.error ? "#fffbeb" : "#f9fafb",
-                    }}
-                  >
-                    <strong>{seg.segment}</strong> * {seg.elements.join(" * ")}
-                    {seg.error && (
-                      <span style={{ color: "#92400e", marginLeft: 8 }}>
-                        — {seg.error}
-                      </span>
-                    )}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
+          <div
+            style={{
+              border: "1px solid #e5e7eb",
+              borderRadius: 10,
+              padding: 14,
+              background: "#ffffff",
+            }}
+          >
+            <h2 style={{ marginTop: 0, marginBottom: 8 }}>Parsed Segments</h2>
+            <p style={{ marginTop: 0, color: "#6b7280", fontSize: 14 }}>
+              {result.segments.length} segments parsed. Click any row for explanation.
+              {completeParse ? " Complete parse details are shown below as an extra view." : ""}
+            </p>
+            <ul style={{ listStyle: "none", padding: 0 }}>
+              {result.segments.map((seg, i) => (
+                <li
+                  key={i}
+                  onClick={() => explain(seg.error ? "error" : "segment", seg)}
+                  style={{
+                    padding: "10px 12px",
+                    marginBottom: 6,
+                    cursor: "pointer",
+                    border: "1px solid #d1d5db",
+                    borderRadius: 8,
+                    backgroundColor: seg.error ? "#fffbeb" : "#f9fafb",
+                  }}
+                >
+                  <strong>{seg.segment}</strong> * {seg.elements.join(" * ")}
+                  {seg.error && (
+                    <span style={{ color: "#92400e", marginLeft: 8 }}>
+                      — {seg.error}
+                    </span>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </div>
           {result.errors.length > 0 && (
             <div
               style={{
