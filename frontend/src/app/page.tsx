@@ -79,7 +79,7 @@ export default function Home() {
     } catch (e) {
       setResult({
         segments: [],
-        errors: [{ segment: "Error", elements: [], error: String(e) }],
+        errors: [{ segment: "Error",  error: String(e) }],
       });
     } finally {
       setLoading(false);
